@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fapi_client_4_3_1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/fapi_client_4_3_1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
