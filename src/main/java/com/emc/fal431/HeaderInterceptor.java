@@ -8,10 +8,14 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import java.io.IOException;
 
 
-public class HeaderInterceptor
-        implements Interceptor {
-    private String user = "admin";
-    private String password = "admin";
+public class HeaderInterceptor implements Interceptor {
+    private String user;
+    private String password;
+
+    public HeaderInterceptor(String user, String password) {
+        this.user = user;
+        this.password = password;
+    }
 
     @Override
     public Response intercept(Chain chain)
