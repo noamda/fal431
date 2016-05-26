@@ -28,7 +28,7 @@ public class Rp4vmClusterConnectorFactory {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(JacksonConverterFactory.create())
-                .baseUrl("https://"+ipAddress+":7225/fapi/rest/4_3_1/")
+                .baseUrl("https://"+ipAddress+":7225/fapi/rest/4_3/")
                 .client(httpClient.build())
                 .build();
 

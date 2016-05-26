@@ -1,10 +1,8 @@
 package com.emc.fal431;
 
-import com.emc.fal431.commons.ClusterVirtualInfrastructuresState;
-import com.emc.fal431.commons.RecoverPointClustersInformation;
-import com.emc.fal431.commons.RecoverPointTimeStamp;
+import com.emc.fal431.commons.*;
 import retrofit2.Call;
-import retrofit2.http.GET;
+import retrofit2.http.*;
 import retrofit2.http.Path;
 
 /**
@@ -22,4 +20,17 @@ public interface Rp4vmClusterConnector {
 
     @GET(BASE_URL + "clusters")
     public Call<RecoverPointClustersInformation> getRpClustersInformation();
+
+
+    @POST(BASE_URL + "groups/virtual_machines/replicate")
+    public Call<ConsistencyGroupUID> replicateVms(@Body ReplicateVmsParam params, @Query("startTransfer") boolean startTransfer);
+
+    @GET(BASE_URL + "settings/defaults/group_link_policy/remote")
+    public Call<ConsistencyGroupLinkPolicy> getDefaultRemoteGroupLinkPolicy();
+
+    @GET(BASE_URL + "clusters/{clusterId}/settings")
+    public Call<ClusterSettings> getClusterSettings(@Path("clusterId") long clusterId);
+
+
+
 }
