@@ -55,9 +55,9 @@ public class Rp4vmClient {
             }
             return res;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new Rp4vmClientException(e);
         }
-        return null;
+
     }
 
     /**
@@ -76,9 +76,9 @@ public class Rp4vmClient {
                         clusterInfo.getClusterName());
             return res;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new Rp4vmClientException(e);
         }
-        return null;
+
     }
 
     private void validateResponse(Response<?> response) throws Rp4vmClientException {
@@ -90,166 +90,225 @@ public class Rp4vmClient {
         }
     }
 
-//    //Create consisteny group
-//    public long createConsistencyGroup(String cgName, List<String> vmIds,
-//                                       List<PackageConfig> accountConfigList, int rpo,
-//                                       boolean startReplication) {
-//        Map<Long, PackageConfig> accountConfigsMap = getAccountConfigsMap(accountConfigList);
-//        ReplicateVmsParam replicateVmsParam = new ReplicateVmsParam();
-//
-//        // CG name
-//        replicateVmsParam.setCgName(cgName);
-//        replicateVmsParam.setStartTransfer(startReplication);
-//
-//        // production copy ID
-//        PackageConfig productionConfig = null;
-//        // List<AccountConfig> replicasConfig = new LinkedList<AccountConfig>();
-//        for (PackageConfig accountConfig : accountConfigList) {
-//            if (accountConfig.getIsProductionCluster()) {
-//                productionConfig = accountConfig;
-//            }
-//        }
-//
-//        GlobalCopyUID productionCopy = new GlobalCopyUID();
-//        productionCopy.setCopyUID(0);
-//        Long productionClusterId = productionConfig.getClusterId();
-//        productionCopy.setClusterUID(new ClusterUID(productionClusterId));
-//        replicateVmsParam.setProductionCopy(productionCopy);
-//
-//        // replication sets
-//        Collection<VMReplicationSetParam> vmReplicationSets = replicateVmsParam
-//                .getVmReplicationSets();
-//
-//        for (String vmId : vmIds) {
-//            List<ReplicatedVMParams> replicatedVmParams = new LinkedList<ReplicatedVMParams>();
-//
-//            // create source vm parameter
-//            ReplicatedVMParams sourceReplicatedVMParam = new ReplicatedVMParams();
-//
-//            SourceVmParam sourceVmParam = new SourceVmParam();
-//            VmUID vmUID = new VmUID();
-//            vmUID.setUuid(vmId);
-//            String prodVcId = accountConfigsMap.get(productionClusterId)
-//                    .getVcId();
-//            VirtualCenterUID virtualCenterUID = new VirtualCenterUID(prodVcId);
-//            vmUID.setVirtualCenterUID(virtualCenterUID);
-//            sourceVmParam.setVmUID(vmUID);
-//            sourceVmParam.setClusterUID(new ClusterUID(productionClusterId));
-//
-//            sourceReplicatedVMParam.setVmParam(sourceVmParam);
-//            sourceReplicatedVMParam.setCopyUID(productionCopy);
-//
-//            // replicatedVmParams.add(sourceReplicatedVMParam);
-//
-//            // add source and targets
-//            for (PackageConfig accountConfig : accountConfigList) {
-//                if (!accountConfig.getIsProductionCluster()) {
-//                    // add source vm parameter
-//                    replicatedVmParams.add(sourceReplicatedVMParam);
-//                    // add target vm parameter
-//                    ReplicatedVMParams targetReplicatedVMParam = new ReplicatedVMParams();
-//                    CreateVMParam createVMParam = new CreateVMParam();
-//                    GlobalCopyUID targetGlobalCopyUID = new GlobalCopyUID(
-//                            new ClusterUID(accountConfig.getClusterId()), 0);
-//                    String replicaVcId = accountConfigsMap.get(
-//                            targetGlobalCopyUID.getClusterUID().getId())
-//                            .getVcId();
-//                    String replicaDataStoreId = accountConfigsMap.get(
-//                            targetGlobalCopyUID.getClusterUID().getId())
-//                            .getDatastoreId();
-//                    String replicaEsxId = accountConfigsMap.get(
-//                            targetGlobalCopyUID.getClusterUID().getId())
-//                            .getEsxId();
-//                    createVMParam
-//                            .setTargetVirtualCenterUID(new VirtualCenterUID(
-//                                    replicaVcId));
-//                    createVMParam.setTargetDatastoreUID(new DatastoreUID(
-//                            replicaDataStoreId));
-//                    createVMParam
-//                            .setTargetResourcePlacementParam(new CreateTargetVMManualResourcePlacementParam(
-//                                    new EsxUID(replicaEsxId)));
-//
-//                    targetReplicatedVMParam.setVmParam(createVMParam);
-//                    targetReplicatedVMParam.setCopyUID(targetGlobalCopyUID);
-//
-//                    replicatedVmParams.add(targetReplicatedVMParam);
-//                }
-//            }
-//
-//            VirtualHardwareReplicationPolicy virtualHardwareReplicationPolicy = new VirtualHardwareReplicationPolicy();
-//            virtualHardwareReplicationPolicy
-//                    .setProvisionPolicy(DiskProvisionPolicy.SAME_AS_SOURCE);
-//            virtualHardwareReplicationPolicy
-//                    .setHwChangesPolicy(HardwareChangesPolicy.REPLICATE_HW_CHANGES);
-//
-//            VirtualDisksReplicationPolicy virtualDisksReplicationPolicy = new VirtualDisksReplicationPolicy();
-//            virtualDisksReplicationPolicy.setAutoReplicateNewVirtualDisks(true);
-//
-//            // create and add new replication set
-//            VMReplicationSetParam replicationSetParam = new VMReplicationSetParam(
-//                    replicatedVmParams, virtualHardwareReplicationPolicy,
-//                    virtualDisksReplicationPolicy);
-//            vmReplicationSets.add(replicationSetParam);
-//
-//        }
-//
-//        // create copies
-//        Collection<ConsistencyGroupCopyParam> copiesList = replicateVmsParam.getCopies();
-//        for (PackageConfig accountConfig : accountConfigList) {
-//            GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
-//                    accountConfig.getClusterId()), 0);
-//            ConsistencyGroupCopyParam consistencyGroupCopyParam = new ConsistencyGroupCopyParam();
-//            consistencyGroupCopyParam.setCopyUID(copyUID);
-//            consistencyGroupCopyParam.setCopyName(accountConfig
-//                    .getClusterFriendlyName());
-//
-//            ConsistencyGroupCopyVolumeCreationParams consistencyGroupCopyVolumeCreationParams = new ConsistencyGroupCopyVolumeCreationParams();
-//            VolumeCreationParams volumeCreationParams = new VolumeCreationParams();
-//
-//            volumeCreationParams.setVolumeSize(new VolumeSize(
-//                    10l * 1024l * 1024l * 1024l));
-//
-//            ResourcePoolUID resourcePoolUID = getRelevantResourcePool(
-//                    accountConfig.getClusterId(), accountConfig.getVcId(),
-//                    accountConfig.getDatastoreId());
-//
-//            volumeCreationParams.setPoolUid(resourcePoolUID);
-//            volumeCreationParams
-//                    .setResourcePoolType(ArrayResourcePoolType.VC_DATASTORE);
-//            volumeCreationParams.setArrayUid(resourcePoolUID.getArrayUid());
-//
-//            consistencyGroupCopyVolumeCreationParams.getVolumeParams().add(
-//                    volumeCreationParams);
-//            consistencyGroupCopyParam
-//                    .setVolumeCreationParams(consistencyGroupCopyVolumeCreationParams);
-//            copiesList.add(consistencyGroupCopyParam);
-//
-//        }
-//
-//        // create links
-//        Collection<FullConsistencyGroupLinkPolicy> linkPoliciesList = replicateVmsParam.getLinks();
-//        ConsistencyGroupLinkPolicy remoteDefaultLinkPolicy = connector
-//                .getDefaultRemoteGroupLinkPolicy();
-//        remoteDefaultLinkPolicy.getProtectionPolicy().getRpoPolicy()
-//                .setMaximumAllowedLag(new Quantity(rpo, QuantityType.MINUTES));
-//        for (PackageConfig accountConfig : accountConfigList) {
-//            if (!accountConfig.getIsProductionCluster()) {
-//                ConsistencyGroupLinkUID linkUID = new ConsistencyGroupLinkUID();
-//                linkUID.setGroupUID(new ConsistencyGroupUID(0));
-//                linkUID.setFirstCopy(productionCopy);
-//                GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
-//                        accountConfig.getClusterId()), 0);
-//                linkUID.setSecondCopy(copyUID);
-//                FullConsistencyGroupLinkPolicy fullConsistencyGroupLinkPolicy = new FullConsistencyGroupLinkPolicy();
-//                fullConsistencyGroupLinkPolicy
-//                        .setLinkPolicy(remoteDefaultLinkPolicy);
-//                fullConsistencyGroupLinkPolicy.setLinkUID(linkUID);
-//                linkPoliciesList.add(fullConsistencyGroupLinkPolicy);
-//            }
-//        }
-//
-//        ConsistencyGroupUID consistencyGroupUID = connector.replicateVms(
-//                replicateVmsParam, true);
-//        return consistencyGroupUID.getId();
-//    }
+    //Create consisteny group
+    public long createConsistencyGroup(String cgName, List<String> vmIds,
+                                       ClustersVirtualConfiguration clustersVirtualConfiguration, int rpo,
+                                       boolean startReplication) throws Rp4vmClientException{
+
+        ReplicateVmsParam replicateVmsParam = new ReplicateVmsParam();
+
+        // CG name
+        replicateVmsParam.setCgName(cgName);
+        replicateVmsParam.setStartTransfer(startReplication);
+
+        // production copy ID
+        ClusterVirtualConfiguration productionConfig = clustersVirtualConfiguration.getProductionCluster();
+
+
+        GlobalCopyUID productionCopy = new GlobalCopyUID();
+        productionCopy.setCopyUID(0);
+        Long productionClusterId = productionConfig.getClusterId();
+        productionCopy.setClusterUID(new ClusterUID(productionClusterId));
+        replicateVmsParam.setProductionCopy(productionCopy);
+
+        // replication sets
+        Collection<VMReplicationSetParam> vmReplicationSets = replicateVmsParam
+                .getVmReplicationSets();
+
+        for (String vmId : vmIds) {
+            List<ReplicatedVMParams> replicatedVmParams = new LinkedList<ReplicatedVMParams>();
+
+            // create source vm parameter
+            ReplicatedVMParams sourceReplicatedVMParam = new ReplicatedVMParams();
+
+            SourceVmParam sourceVmParam = new SourceVmParam();
+            VmUID vmUID = new VmUID();
+            vmUID.setUuid(vmId);
+            String prodVcId = productionConfig.getVcId();
+            VirtualCenterUID virtualCenterUID = new VirtualCenterUID(prodVcId);
+            vmUID.setVirtualCenterUID(virtualCenterUID);
+            sourceVmParam.setVmUID(vmUID);
+            sourceVmParam.setClusterUID(new ClusterUID(productionClusterId));
+
+            sourceReplicatedVMParam.setVmParam(sourceVmParam);
+            sourceReplicatedVMParam.setCopyUID(productionCopy);
+
+            // replicatedVmParams.add(sourceReplicatedVMParam);
+
+            // add source and targets
+            for (ClusterVirtualConfiguration accountConfig : clustersVirtualConfiguration.getReplicaClusters()) {
+                    // add source vm parameter
+                    replicatedVmParams.add(sourceReplicatedVMParam);
+                    // add target vm parameter
+                    ReplicatedVMParams targetReplicatedVMParam = new ReplicatedVMParams();
+                    CreateVMParam createVMParam = new CreateVMParam();
+                    GlobalCopyUID targetGlobalCopyUID = new GlobalCopyUID(
+                            new ClusterUID(accountConfig.getClusterId()), 0);
+                    String replicaVcId = accountConfig
+                            .getVcId();
+                    String replicaDataStoreId = accountConfig
+                            .getDatastoreId();
+                    String replicaEsxId = accountConfig
+                            .getEsxId();
+                    createVMParam
+                            .setTargetVirtualCenterUID(new VirtualCenterUID(
+                                    replicaVcId));
+                    createVMParam.setTargetDatastoreUID(new DatastoreUID(
+                            replicaDataStoreId));
+                    createVMParam
+                            .setTargetResourcePlacementParam(new CreateTargetVMManualResourcePlacementParam(
+                                    new EsxUID(replicaEsxId)));
+
+                    targetReplicatedVMParam.setVmParam(createVMParam);
+                    targetReplicatedVMParam.setCopyUID(targetGlobalCopyUID);
+
+                    replicatedVmParams.add(targetReplicatedVMParam);
+
+            }
+
+            VirtualHardwareReplicationPolicy virtualHardwareReplicationPolicy = new VirtualHardwareReplicationPolicy();
+            virtualHardwareReplicationPolicy
+                    .setProvisionPolicy(DiskProvisionPolicy.SAME_AS_SOURCE);
+            virtualHardwareReplicationPolicy
+                    .setHwChangesPolicy(HardwareChangesPolicy.REPLICATE_HW_CHANGES);
+
+            VirtualDisksReplicationPolicy virtualDisksReplicationPolicy = new VirtualDisksReplicationPolicy();
+            virtualDisksReplicationPolicy.setAutoReplicateNewVirtualDisks(true);
+
+            // create and add new replication set
+            VMReplicationSetParam replicationSetParam = new VMReplicationSetParam(
+                    replicatedVmParams, virtualHardwareReplicationPolicy,
+                    virtualDisksReplicationPolicy);
+            vmReplicationSets.add(replicationSetParam);
+
+        }
+
+        // create copies
+        Collection<ConsistencyGroupCopyParam> copiesList = replicateVmsParam.getCopies();
+        List<ClusterVirtualConfiguration> joinedProductionReplicaConfigs = new ArrayList<ClusterVirtualConfiguration>();
+        joinedProductionReplicaConfigs.add(productionConfig);
+        joinedProductionReplicaConfigs.addAll(clustersVirtualConfiguration.getReplicaClusters());
+        for (ClusterVirtualConfiguration accountConfig : joinedProductionReplicaConfigs) {
+            GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
+                    accountConfig.getClusterId()), 0);
+            ConsistencyGroupCopyParam consistencyGroupCopyParam = new ConsistencyGroupCopyParam();
+            consistencyGroupCopyParam.setCopyUID(copyUID);
+            consistencyGroupCopyParam.setCopyName(accountConfig
+                    .getClusterFriendlyName());
+
+            ConsistencyGroupCopyVolumeCreationParams consistencyGroupCopyVolumeCreationParams = new ConsistencyGroupCopyVolumeCreationParams();
+            VolumeCreationParams volumeCreationParams = new VolumeCreationParams();
+
+            volumeCreationParams.setVolumeSize(new VolumeSize(
+                    10l * 1024l * 1024l * 1024l));
+
+            ResourcePoolUID resourcePoolUID = getRelevantResourcePool(
+                    accountConfig.getClusterId(), accountConfig.getVcId(),
+                    accountConfig.getDatastoreId());
+
+            volumeCreationParams.setPoolUid(resourcePoolUID);
+            volumeCreationParams
+                    .setResourcePoolType(ArrayResourcePoolType.VC_DATASTORE);
+            volumeCreationParams.setArrayUid(resourcePoolUID.getArrayUid());
+
+            consistencyGroupCopyVolumeCreationParams.getVolumeParams().add(
+                    volumeCreationParams);
+            consistencyGroupCopyParam
+                    .setVolumeCreationParams(consistencyGroupCopyVolumeCreationParams);
+            copiesList.add(consistencyGroupCopyParam);
+
+        }
+
+        // create links
+        Collection<FullConsistencyGroupLinkPolicy> linkPoliciesList = replicateVmsParam.getLinks();
+        ConsistencyGroupLinkPolicy remoteDefaultLinkPolicy = getDefaultRemoteGroupLinkPolicy();
+        remoteDefaultLinkPolicy.getProtectionPolicy().getRpoPolicy()
+                .setMaximumAllowedLag(new Quantity(rpo, QuantityType.MINUTES));
+        for (ClusterVirtualConfiguration accountConfig : clustersVirtualConfiguration.getReplicaClusters()) {
+                ConsistencyGroupLinkUID linkUID = new ConsistencyGroupLinkUID();
+                linkUID.setGroupUID(new ConsistencyGroupUID(0));
+                linkUID.setFirstCopy(productionCopy);
+                GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
+                        accountConfig.getClusterId()), 0);
+                linkUID.setSecondCopy(copyUID);
+                FullConsistencyGroupLinkPolicy fullConsistencyGroupLinkPolicy = new FullConsistencyGroupLinkPolicy();
+                fullConsistencyGroupLinkPolicy
+                        .setLinkPolicy(remoteDefaultLinkPolicy);
+                fullConsistencyGroupLinkPolicy.setLinkUID(linkUID);
+                linkPoliciesList.add(fullConsistencyGroupLinkPolicy);
+        }
+
+        ConsistencyGroupUID consistencyGroupUID = replicateVms(
+                replicateVmsParam, true);
+        return consistencyGroupUID.getId();
+    }
+
+
+    public ResourcePoolUID getRelevantResourcePool(long clusterId, String vcId,
+                                                   String datastoreId) throws Rp4vmClientException{
+        ResourcePoolUID res = null;
+        ClusterSettings clusterSettings = getClusterSettings(clusterId);
+        Collection<ArrayManagementProviderSettings> arrayManagementProviderSettings = clusterSettings
+                .getAmpsSettings();
+        for (ArrayManagementProviderSettings currProviderSettings : arrayManagementProviderSettings) {
+            if (currProviderSettings.getType().equals(
+                    ArrayManagementProviderType.VC)) {
+                Collection<ArraySettings> managedArrays = currProviderSettings
+                        .getManagedArrays();
+                for (ArraySettings currArraySettings : managedArrays) {
+                    String serialNumber = currArraySettings.getSerialNumber();
+                    if (vcId.equals(serialNumber)) {
+                        Collection<ArrayResourcePoolSettings> resourcePools = currArraySettings
+                                .getResourcePools();
+                        for (ArrayResourcePoolSettings currArrayResourcePoolSettings : resourcePools) {
+                            ResourcePoolUID resourcePoolUid = currArrayResourcePoolSettings
+                                    .getResourcePoolUID();
+                            if (resourcePoolUid.getStorageResourcePoolId()
+                                    .equals(datastoreId)) {
+                                res = resourcePoolUid;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+
+
+    public ClusterSettings getClusterSettings(long clusterId) throws Rp4vmClientException{
+        try {
+            Response<ClusterSettings> response = service.getClusterSettings(clusterId).execute();
+            validateResponse(response);
+            ClusterSettings clusterConfig = response.body();
+            return clusterConfig;
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
+
+    public ConsistencyGroupLinkPolicy getDefaultRemoteGroupLinkPolicy() throws Rp4vmClientException{
+        try {
+            Response<ConsistencyGroupLinkPolicy> response = service.getDefaultRemoteGroupLinkPolicy().execute();
+            validateResponse(response);
+            ConsistencyGroupLinkPolicy consistencyGroupLinkPolicy = response.body();
+            return consistencyGroupLinkPolicy;
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
+    public ConsistencyGroupUID replicateVms(ReplicateVmsParam params, boolean startTransfer) throws Rp4vmClientException{
+        try {
+            Response<ConsistencyGroupUID> response = service.replicateVms(params, startTransfer).execute();
+            validateResponse(response);
+            ConsistencyGroupUID groupUID = response.body();
+            return groupUID;
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
 }
