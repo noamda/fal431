@@ -1,6 +1,8 @@
 package com.emc.fal431;
 
-import com.emc.fal431.commons.*;
+
+import com.emc.fal431.exceptions.Rp4vmClusterNotFoundException;
+import com.emc.fapi.jaxws.v4_3_1.*;
 import com.emc.fal431.exceptions.Rp4vmClientException;
 import com.emc.fal431.exceptions.Rp4vmClientUnAuthorizedException;
 import org.springframework.http.HttpStatus;
@@ -17,8 +19,10 @@ import java.util.*;
 public class Rp4vmClient {
 
     private Rp4vmClusterConnector service;
+    private String ipAddress;
 
     public Rp4vmClient(String ipAddress, String user, String password) throws NoSuchAlgorithmException, KeyManagementException {
+        this.ipAddress = ipAddress;
         this.service = Rp4vmClusterConnectorFactory.getConnector(ipAddress, user, password);
     }
 
@@ -43,7 +47,7 @@ public class Rp4vmClient {
             Response<ClusterVirtualInfrastructuresState> response =
                     service.getVirtualInfrastructuresStateFromCluster(clusterId).execute();
             validateResponse(response);
-            ClusterVirtualInfrastructuresState state =response.body();
+            ClusterVirtualInfrastructuresState state = response.body();
 
             Collection<VmState> vmStateList =
                     state.getVirtualInfrastructuresState().getVmsState();
@@ -93,7 +97,7 @@ public class Rp4vmClient {
     //Create consisteny group
     public long createConsistencyGroup(String cgName, List<String> vmIds,
                                        ClustersVirtualConfiguration clustersVirtualConfiguration, int rpo,
-                                       boolean startReplication) throws Rp4vmClientException{
+                                       boolean startReplication) throws Rp4vmClientException {
 
         ReplicateVmsParam replicateVmsParam = new ReplicateVmsParam();
 
@@ -137,32 +141,32 @@ public class Rp4vmClient {
 
             // add source and targets
             for (ClusterVirtualConfiguration accountConfig : clustersVirtualConfiguration.getReplicaClusters()) {
-                    // add source vm parameter
-                    replicatedVmParams.add(sourceReplicatedVMParam);
-                    // add target vm parameter
-                    ReplicatedVMParams targetReplicatedVMParam = new ReplicatedVMParams();
-                    CreateVMParam createVMParam = new CreateVMParam();
-                    GlobalCopyUID targetGlobalCopyUID = new GlobalCopyUID(
-                            new ClusterUID(accountConfig.getClusterId()), 0);
-                    String replicaVcId = accountConfig
-                            .getVcId();
-                    String replicaDataStoreId = accountConfig
-                            .getDatastoreId();
-                    String replicaEsxId = accountConfig
-                            .getEsxId();
-                    createVMParam
-                            .setTargetVirtualCenterUID(new VirtualCenterUID(
-                                    replicaVcId));
-                    createVMParam.setTargetDatastoreUID(new DatastoreUID(
-                            replicaDataStoreId));
-                    createVMParam
-                            .setTargetResourcePlacementParam(new CreateTargetVMManualResourcePlacementParam(
-                                    new EsxUID(replicaEsxId)));
+                // add source vm parameter
+                replicatedVmParams.add(sourceReplicatedVMParam);
+                // add target vm parameter
+                ReplicatedVMParams targetReplicatedVMParam = new ReplicatedVMParams();
+                CreateVMParam createVMParam = new CreateVMParam();
+                GlobalCopyUID targetGlobalCopyUID = new GlobalCopyUID(
+                        new ClusterUID(accountConfig.getClusterId()), 0);
+                String replicaVcId = accountConfig
+                        .getVcId();
+                String replicaDataStoreId = accountConfig
+                        .getDatastoreId();
+                String replicaEsxId = accountConfig
+                        .getEsxId();
+                createVMParam
+                        .setTargetVirtualCenterUID(new VirtualCenterUID(
+                                replicaVcId));
+                createVMParam.setTargetDatastoreUID(new DatastoreUID(
+                        replicaDataStoreId));
+                createVMParam
+                        .setTargetResourcePlacementParam(new CreateTargetVMManualResourcePlacementParam(
+                                new EsxUID(replicaEsxId)));
 
-                    targetReplicatedVMParam.setVmParam(createVMParam);
-                    targetReplicatedVMParam.setCopyUID(targetGlobalCopyUID);
+                targetReplicatedVMParam.setVmParam(createVMParam);
+                targetReplicatedVMParam.setCopyUID(targetGlobalCopyUID);
 
-                    replicatedVmParams.add(targetReplicatedVMParam);
+                replicatedVmParams.add(targetReplicatedVMParam);
 
             }
 
@@ -225,17 +229,17 @@ public class Rp4vmClient {
         remoteDefaultLinkPolicy.getProtectionPolicy().getRpoPolicy()
                 .setMaximumAllowedLag(new Quantity(rpo, QuantityType.MINUTES));
         for (ClusterVirtualConfiguration accountConfig : clustersVirtualConfiguration.getReplicaClusters()) {
-                ConsistencyGroupLinkUID linkUID = new ConsistencyGroupLinkUID();
-                linkUID.setGroupUID(new ConsistencyGroupUID(0));
-                linkUID.setFirstCopy(productionCopy);
-                GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
-                        accountConfig.getClusterId()), 0);
-                linkUID.setSecondCopy(copyUID);
-                FullConsistencyGroupLinkPolicy fullConsistencyGroupLinkPolicy = new FullConsistencyGroupLinkPolicy();
-                fullConsistencyGroupLinkPolicy
-                        .setLinkPolicy(remoteDefaultLinkPolicy);
-                fullConsistencyGroupLinkPolicy.setLinkUID(linkUID);
-                linkPoliciesList.add(fullConsistencyGroupLinkPolicy);
+            ConsistencyGroupLinkUID linkUID = new ConsistencyGroupLinkUID();
+            linkUID.setGroupUID(new ConsistencyGroupUID(0));
+            linkUID.setFirstCopy(productionCopy);
+            GlobalCopyUID copyUID = new GlobalCopyUID(new ClusterUID(
+                    accountConfig.getClusterId()), 0);
+            linkUID.setSecondCopy(copyUID);
+            FullConsistencyGroupLinkPolicy fullConsistencyGroupLinkPolicy = new FullConsistencyGroupLinkPolicy();
+            fullConsistencyGroupLinkPolicy
+                    .setLinkPolicy(remoteDefaultLinkPolicy);
+            fullConsistencyGroupLinkPolicy.setLinkUID(linkUID);
+            linkPoliciesList.add(fullConsistencyGroupLinkPolicy);
         }
 
         ConsistencyGroupUID consistencyGroupUID = replicateVms(
@@ -245,7 +249,7 @@ public class Rp4vmClient {
 
 
     public ResourcePoolUID getRelevantResourcePool(long clusterId, String vcId,
-                                                   String datastoreId) throws Rp4vmClientException{
+                                                   String datastoreId) throws Rp4vmClientException {
         ResourcePoolUID res = null;
         ClusterSettings clusterSettings = getClusterSettings(clusterId);
         Collection<ArrayManagementProviderSettings> arrayManagementProviderSettings = clusterSettings
@@ -276,8 +280,7 @@ public class Rp4vmClient {
     }
 
 
-
-    public ClusterSettings getClusterSettings(long clusterId) throws Rp4vmClientException{
+    public ClusterSettings getClusterSettings(long clusterId) throws Rp4vmClientException {
         try {
             Response<ClusterSettings> response = service.getClusterSettings(clusterId).execute();
             validateResponse(response);
@@ -289,7 +292,7 @@ public class Rp4vmClient {
     }
 
 
-    public ConsistencyGroupLinkPolicy getDefaultRemoteGroupLinkPolicy() throws Rp4vmClientException{
+    public ConsistencyGroupLinkPolicy getDefaultRemoteGroupLinkPolicy() throws Rp4vmClientException {
         try {
             Response<ConsistencyGroupLinkPolicy> response = service.getDefaultRemoteGroupLinkPolicy().execute();
             validateResponse(response);
@@ -300,12 +303,62 @@ public class Rp4vmClient {
         }
     }
 
-    public ConsistencyGroupUID replicateVms(ReplicateVmsParam params, boolean startTransfer) throws Rp4vmClientException{
+    public ConsistencyGroupUID replicateVms(ReplicateVmsParam params, boolean startTransfer) throws Rp4vmClientException {
         try {
             Response<ConsistencyGroupUID> response = service.replicateVms(params, startTransfer).execute();
             validateResponse(response);
             ConsistencyGroupUID groupUID = response.body();
             return groupUID;
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
+
+    public Long getClusterUID(String clusterName) throws Rp4vmClientException, Rp4vmClusterNotFoundException {
+        try {
+            Response<RecoverPointClustersInformation> response = service.getClusters().execute();
+            RecoverPointClustersInformation clustersInformation = response.body();
+            for (ClusterInfo clusterInfo : clustersInformation.getClustersInformation()) {
+                if (clusterInfo.getClusterName().equals(clusterName)) {
+                    return clusterInfo.getClusterUID().getId();
+                }
+            }
+            throw new Rp4vmClusterNotFoundException("Cluster " + clusterName + " not found in system " + this.ipAddress);
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
+//    //Create consisteny group
+//    public long createConsistencyGroupnew(String cgName, List<String> vmIds,
+//                                          Long prodClusterId, int rpo,
+//                                          boolean startReplication) throws Rp4vmClientException {
+//        ReplicateVmsParam replicateVmsParam = new ReplicateVmsParam();
+//        replicateVmsParam.setCgName(cgName);
+//
+//        GlobalCopyUID prodCopyUid = new GlobalCopyUID(new ClusterUID(prodClusterId), 0);
+//        replicateVmsParam.setProductionCopy(prodCopyUid);
+//
+//        ConsistencyGroupUID consistencyGroupUID =
+//                replicateVms(replicateVmsParam, true);
+//        return consistencyGroupUID.getId();
+//
+//    }
+
+    public String getVcenterUuid(long clusterId) throws Rp4vmClientException, Rp4vmClusterNotFoundException {
+        try {
+            Response<ClusterVirtualInfraConfiguration> response = service.getClusterInfrastructureConfiguration(clusterId).execute();
+            if (HttpStatus.INTERNAL_SERVER_ERROR.value() == response.code()) {
+                throw new Rp4vmClusterNotFoundException(clusterId, ipAddress);
+            }
+            ClusterVirtualInfraConfiguration clusterVirtualInfraConfiguration = response.body();
+            List<VirtualCenterConfiguration> virtualCenterConfigurationList = clusterVirtualInfraConfiguration.getVirtualCentersConfiguration();
+            if (virtualCenterConfigurationList.size() != 1) {
+                throw new Rp4vmClientException("Cluster " + clusterId + " has " + virtualCenterConfigurationList.size() + " vCenter configurations");
+            }
+            String vCenterUuid = virtualCenterConfigurationList.get(0).getVirtualCenterUID().getUuid();
+            return vCenterUuid;
         } catch (IOException e) {
             throw new Rp4vmClientException(e);
         }

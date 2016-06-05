@@ -1,9 +1,10 @@
 package com.emc.fal431;
 
+import com.emc.fal431.convertor.JacksonConverterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
+
 
 import javax.net.ssl.*;
 import java.security.KeyManagementException;
@@ -28,7 +29,7 @@ public class Rp4vmClusterConnectorFactory {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(JacksonConverterFactory.create())
-                .baseUrl("https://"+ipAddress+":7225/fapi/rest/4_3/")
+                .baseUrl("https://"+ipAddress+":7225/fapi/rest/4_3_1/")
                 .client(httpClient.build())
                 .build();
 

@@ -1,6 +1,6 @@
 package com.emc.fal431;
 
-import com.emc.fal431.commons.*;
+import com.emc.fapi.jaxws.v4_3_1.*;
 import retrofit2.Call;
 import retrofit2.http.*;
 import retrofit2.http.Path;
@@ -26,11 +26,16 @@ public interface Rp4vmClusterConnector {
     public Call<ConsistencyGroupUID> replicateVms(@Body ReplicateVmsParam params, @Query("startTransfer") boolean startTransfer);
 
     @GET(BASE_URL + "settings/defaults/group_link_policy/remote")
-    public Call<ConsistencyGroupLinkPolicy> getDefaultRemoteGroupLinkPolicy();
+        public Call<ConsistencyGroupLinkPolicy> getDefaultRemoteGroupLinkPolicy();
 
     @GET(BASE_URL + "clusters/{clusterId}/settings")
     public Call<ClusterSettings> getClusterSettings(@Path("clusterId") long clusterId);
 
+    @GET(BASE_URL + "clusters/")
+    public Call<RecoverPointClustersInformation> getClusters();
 
+    @GET(BASE_URL + "clusters/{clusterId}/virtual_infra_configuration")
+    public Call<ClusterVirtualInfraConfiguration> getClusterInfrastructureConfiguration(
+            @Path("clusterId") long clusterId);
 
 }
