@@ -46,16 +46,16 @@
             <artifactId>converter-scalars</artifactId>
             <version>${retrofit.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.squareup.retrofit2</groupId>
-            <artifactId>converter-jackson</artifactId>
-            <version>${retrofit.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.squareup.retrofit2</groupId>
-            <artifactId>converter-gson</artifactId>
-            <version>${retrofit.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.squareup.retrofit2</groupId>-->
+            <!--<artifactId>converter-jackson</artifactId>-->
+            <!--<version>${retrofit.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.squareup.retrofit2</groupId>-->
+            <!--<artifactId>converter-gson</artifactId>-->
+            <!--<version>${retrofit.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>logging-interceptor</artifactId>
