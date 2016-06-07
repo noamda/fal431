@@ -1,7 +1,9 @@
 package com.emc.fal431;
 
 
+import com.emc.fal431.convertor.JacksonConverterFactory;
 import com.emc.fal431.exceptions.Rp4vmClusterNotFoundException;
+import com.emc.fal431.exceptions.Rp4vmEsxNotFoundException;
 import com.emc.fapi.jaxws.v4_3_1.*;
 import com.emc.fal431.exceptions.Rp4vmClientException;
 import com.emc.fal431.exceptions.Rp4vmClientUnAuthorizedException;
@@ -12,6 +14,9 @@ import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
+
+import static javax.swing.UIManager.get;
+import static org.apache.coyote.http11.Constants.a;
 
 /**
  * Created by davidn1 on 15-May-16.
@@ -247,6 +252,80 @@ public class Rp4vmClient {
         return consistencyGroupUID.getId();
     }
 
+    //Create consisteny group
+    public long createConsistencyGroupnew(String cgName, String vmId,
+                                          Long prodClusterId, Long targetClusterId, String esxName,String targetDatastoreId, int rpo,
+                                          boolean startReplication) throws Rp4vmClientException, Rp4vmClusterNotFoundException, Rp4vmEsxNotFoundException {
+        ReplicateVmsParam json = new ReplicateVmsParam();
+        //Set CG name
+        json.setCgName(cgName);
+        //Set start Transfer
+        json.setStartTransfer(startReplication);
+        // production copy ID
+        GlobalCopyUID prodCopyUid = new GlobalCopyUID(new ClusterUID(prodClusterId), 0);
+        //Set production copy in replicateVmsparam
+        json.setProductionCopy(prodCopyUid);
+        // replication sets
+        // replication sets
+        Collection<VMReplicationSetParam> vmReplicationSets = json
+                .getVmReplicationSets();
+
+
+        // create target vm parameters
+        ReplicatedVMParams targetReplicatedVMParam = new ReplicatedVMParams();
+        GlobalCopyUID targetCopyUid = new GlobalCopyUID(new ClusterUID(targetClusterId),0);
+        CreateVMParam createTargetVMParam = new CreateVMParam();
+        // get target VcId
+        String targetVcId = getVcenterUuid(targetClusterId);
+        // create target EsxId
+        String targetEsxUID = getEsxId(targetClusterId,esxName);
+        // insert VcID DatastoreID and EsxId to createVMparam
+        createTargetVMParam.setTargetVirtualCenterUID(new VirtualCenterUID(targetVcId));
+        createTargetVMParam.setTargetDatastoreUID(new DatastoreUID(targetDatastoreId));
+        createTargetVMParam.setTargetResourcePlacementParam( new CreateTargetVMManualResourcePlacementParam(new EsxUID(targetEsxUID)));
+        targetReplicatedVMParam.setVmParam(createTargetVMParam);
+        targetReplicatedVMParam.setCopyUID(targetCopyUid);
+
+        // create source vm parameter
+        ReplicatedVMParams sourceReplicatedVMParam = new ReplicatedVMParams();
+        //set copyUID for replicationSetVms
+        sourceReplicatedVMParam.setCopyUID(prodCopyUid);
+        SourceVmParam sourceVmParam = new SourceVmParam();
+        VmUID vmUID = new VmUID();
+        vmUID.setUuid(vmId);
+        String prodVcId = getVcenterUuid(prodClusterId);
+        VirtualCenterUID virtualCenterUID = new VirtualCenterUID(prodVcId);
+        vmUID.setVirtualCenterUID(virtualCenterUID);
+        sourceVmParam.setVmUID(vmUID);
+        sourceVmParam.setClusterUID(new ClusterUID(prodClusterId));
+
+        sourceReplicatedVMParam.setVmParam(sourceVmParam);
+        VMReplicationSetParam vmReplicationSetParam = new VMReplicationSetParam();
+        vmReplicationSetParam.getReplicationSetVms().add(targetReplicatedVMParam);
+        vmReplicationSetParam.getReplicationSetVms().add(sourceReplicatedVMParam);
+        json.getVmReplicationSets().add(vmReplicationSetParam);
+        //add VirtualHardwareReplicationPolicy
+        VirtualHardwareReplicationPolicy virtualHardwareReplicationPolicy = new VirtualHardwareReplicationPolicy();
+        virtualHardwareReplicationPolicy
+                .setProvisionPolicy(DiskProvisionPolicy.SAME_AS_SOURCE);
+        virtualHardwareReplicationPolicy
+                .setHwChangesPolicy(HardwareChangesPolicy.REPLICATE_HW_CHANGES);
+
+        VirtualDisksReplicationPolicy virtualDisksReplicationPolicy = new VirtualDisksReplicationPolicy();
+        virtualDisksReplicationPolicy.setAutoReplicateNewVirtualDisks(true);
+        // add to vmReplicationSetParam
+        vmReplicationSetParam.setVirtualDisksReplicationPolicy(virtualDisksReplicationPolicy);
+        vmReplicationSetParam.setVirtualHardwareReplicationPolicy(virtualHardwareReplicationPolicy);
+        json.getVmReplicationSets().add(vmReplicationSetParam);
+
+
+
+
+
+        ConsistencyGroupUID consistencyGroupUID = replicateVms(json, true);
+        return consistencyGroupUID.getId();
+
+    }
 
     public ResourcePoolUID getRelevantResourcePool(long clusterId, String vcId,
                                                    String datastoreId) throws Rp4vmClientException {
@@ -330,21 +409,6 @@ public class Rp4vmClient {
         }
     }
 
-//    //Create consisteny group
-//    public long createConsistencyGroupnew(String cgName, List<String> vmIds,
-//                                          Long prodClusterId, int rpo,
-//                                          boolean startReplication) throws Rp4vmClientException {
-//        ReplicateVmsParam replicateVmsParam = new ReplicateVmsParam();
-//        replicateVmsParam.setCgName(cgName);
-//
-//        GlobalCopyUID prodCopyUid = new GlobalCopyUID(new ClusterUID(prodClusterId), 0);
-//        replicateVmsParam.setProductionCopy(prodCopyUid);
-//
-//        ConsistencyGroupUID consistencyGroupUID =
-//                replicateVms(replicateVmsParam, true);
-//        return consistencyGroupUID.getId();
-//
-//    }
 
     public String getVcenterUuid(long clusterId) throws Rp4vmClientException, Rp4vmClusterNotFoundException {
         try {
@@ -364,4 +428,36 @@ public class Rp4vmClient {
         }
     }
 
+
+    public String getEsxId(long clusterId, String esxName) throws Rp4vmClusterNotFoundException, Rp4vmClientException, Rp4vmEsxNotFoundException {
+        try {
+            Response<ClusterVirtualInfraConfiguration> response = service.getClusterInfrastructureConfiguration(clusterId).execute();
+            if (HttpStatus.INTERNAL_SERVER_ERROR.value() == response.code()) {
+                throw new Rp4vmClusterNotFoundException(clusterId, ipAddress);
+            }
+            ClusterVirtualInfraConfiguration clusterVirtualInfraConfiguration = response.body();
+            List<VirtualCenterConfiguration> virtualCenterConfigurationList = clusterVirtualInfraConfiguration.getVirtualCentersConfiguration();
+            if (virtualCenterConfigurationList.size() != 1) {
+                throw new Rp4vmClientException("Cluster " + clusterId + " has " + virtualCenterConfigurationList.size() + " vCenter configurations");
+            }
+            List<DatacenterConfiguration> datacenterConfigurations = virtualCenterConfigurationList.get(0).getDatacentersConfiguration();
+
+            for (DatacenterConfiguration datacenterConfiguration : datacenterConfigurations) {
+                   List<EsxClusterConfiguration> esxClusterConfigurations= datacenterConfiguration.getEsxClustersConfiguration();
+                for (EsxClusterConfiguration esxClusterConfiguration :esxClusterConfigurations) {
+                    for (EsxConfiguration esxConfiguration : esxClusterConfiguration.getEsxsConfiguration())
+                        if (esxName.equals(esxConfiguration.getName()))
+                            return esxConfiguration.getEsxUID().toString();
+                }
+
+            }
+            throw new Rp4vmEsxNotFoundException(esxName + " not found in Cluster "+ clusterId);
+        } catch (IOException e) {
+            throw new Rp4vmClientException(e);
+        }
+    }
+
+    public String getEsxId(String clusterName, String esxName) throws Rp4vmClientException, Rp4vmClusterNotFoundException, Rp4vmEsxNotFoundException {
+        return getEsxId(getClusterUID(clusterName), esxName);
+    }
 }
