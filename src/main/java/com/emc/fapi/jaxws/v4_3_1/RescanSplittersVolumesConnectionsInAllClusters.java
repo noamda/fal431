@@ -5,11 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="rescanSplittersVolumesConnectionsInAllClusters")
-public class RescanSplittersVolumesConnectionsInAllClusters {}
+@XmlType(name = "rescanSplittersVolumesConnectionsInAllClusters")
+public class RescanSplittersVolumesConnectionsInAllClusters {
+}
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\RescanSplittersVolumesConnectionsInAllClusters.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

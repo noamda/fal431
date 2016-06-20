@@ -1,19 +1,16 @@
 package com.emc.fapi.jaxws.v4_3_1;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import org.codehaus.jackson.annotate.JsonTypeName;
 
 @JsonTypeName("RepositoryVolumeState")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="RepositoryVolumeState")
+@XmlType(name = "RepositoryVolumeState")
 public class RepositoryVolumeState
-  extends VolumeState
-{}
+        extends VolumeState {
+}
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\RepositoryVolumeState.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

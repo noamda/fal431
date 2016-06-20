@@ -5,11 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="getAllConsistencyGroupsInformation")
-public class GetAllConsistencyGroupsInformation {}
+@XmlType(name = "getAllConsistencyGroupsInformation")
+public class GetAllConsistencyGroupsInformation {
+}
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\GetAllConsistencyGroupsInformation.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

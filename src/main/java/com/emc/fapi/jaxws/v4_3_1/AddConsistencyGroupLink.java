@@ -1,139 +1,63 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="addConsistencyGroupLink", propOrder={"groupLink", "policy"})
-/*     */ public class AddConsistencyGroupLink
-/*     */ {
-/*     */   protected ConsistencyGroupLinkUID groupLink;
-/*     */   protected ConsistencyGroupLinkPolicy policy;
-/*     */   
-/*     */   public AddConsistencyGroupLink() {}
-/*     */   
-/*     */   public AddConsistencyGroupLink(ConsistencyGroupLinkUID groupLink, ConsistencyGroupLinkPolicy policy)
-/*     */   {
-/*  47 */     this.groupLink = groupLink;
-/*  48 */     this.policy = policy;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ConsistencyGroupLinkUID getGroupLink()
-/*     */   {
-/*  60 */     return this.groupLink;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setGroupLink(ConsistencyGroupLinkUID value)
-/*     */   {
-/*  72 */     this.groupLink = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ConsistencyGroupLinkPolicy getPolicy()
-/*     */   {
-/*  84 */     return this.policy;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setPolicy(ConsistencyGroupLinkPolicy value)
-/*     */   {
-/*  96 */     this.policy = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/* 106 */     if (!(obj instanceof AddConsistencyGroupLink)) {
-/* 107 */       return false;
-/*     */     }
-/* 109 */     AddConsistencyGroupLink otherObj = (AddConsistencyGroupLink)obj;
-/*     */     
-/* 111 */     return (this.groupLink != null ? this.groupLink.equals(otherObj.groupLink) : this.groupLink == otherObj.groupLink) && (this.policy != null ? this.policy.equals(otherObj.policy) : this.policy == otherObj.policy);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/* 121 */     return (this.groupLink != null ? this.groupLink.hashCode() : 0) ^ (this.policy != null ? this.policy.hashCode() : 0);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 131 */     return "AddConsistencyGroupLink [groupLink=" + this.groupLink + ", " + "policy=" + this.policy + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\AddConsistencyGroupLink.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "addConsistencyGroupLink", propOrder = {"groupLink", "policy"})
+public class AddConsistencyGroupLink {
+    protected ConsistencyGroupLinkUID groupLink;
+    protected ConsistencyGroupLinkPolicy policy;
+
+    public AddConsistencyGroupLink() {
+    }
+
+    public AddConsistencyGroupLink(ConsistencyGroupLinkUID groupLink, ConsistencyGroupLinkPolicy policy) {
+        this.groupLink = groupLink;
+        this.policy = policy;
+    }
+
+
+    public ConsistencyGroupLinkUID getGroupLink() {
+        return this.groupLink;
+    }
+
+
+    public void setGroupLink(ConsistencyGroupLinkUID value) {
+        this.groupLink = value;
+    }
+
+
+    public ConsistencyGroupLinkPolicy getPolicy() {
+        return this.policy;
+    }
+
+
+    public void setPolicy(ConsistencyGroupLinkPolicy value) {
+        this.policy = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AddConsistencyGroupLink)) {
+            return false;
+        }
+        AddConsistencyGroupLink otherObj = (AddConsistencyGroupLink) obj;
+
+        return (this.groupLink != null ? this.groupLink.equals(otherObj.groupLink) : this.groupLink == otherObj.groupLink) && (this.policy != null ? this.policy.equals(otherObj.policy) : this.policy == otherObj.policy);
+    }
+
+
+    public int hashCode() {
+        return (this.groupLink != null ? this.groupLink.hashCode() : 0) ^ (this.policy != null ? this.policy.hashCode() : 0);
+    }
+
+
+    public String toString() {
+        return "AddConsistencyGroupLink [groupLink=" + this.groupLink + ", " + "policy=" + this.policy + "]";
+    }
+}
+
+

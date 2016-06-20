@@ -1,125 +1,53 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import java.util.ArrayList;
-/*     */ import java.util.List;
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlElement;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="consistencyGroupReportSet", propOrder={"innerSet"})
-/*     */ public class ConsistencyGroupReportSet
-/*     */ {
-/*     */   @XmlElement(nillable=true)
-/*     */   protected List<ConsistencyGroupReport> innerSet;
-/*     */   
-/*     */   public ConsistencyGroupReportSet() {}
-/*     */   
-/*     */   public ConsistencyGroupReportSet(List<ConsistencyGroupReport> innerSet)
-/*     */   {
-/*  55 */     this.innerSet = innerSet;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public List<ConsistencyGroupReport> getInnerSet()
-/*     */   {
-/*  81 */     if (this.innerSet == null) {
-/*  82 */       this.innerSet = new ArrayList();
-/*     */     }
-/*  84 */     return this.innerSet;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  94 */     if (!(obj instanceof ConsistencyGroupReportSet)) {
-/*  95 */       return false;
-/*     */     }
-/*  97 */     ConsistencyGroupReportSet otherObj = (ConsistencyGroupReportSet)obj;
-/*     */     
-/*  99 */     return this.innerSet == otherObj.innerSet ? true : this.innerSet != null ? this.innerSet.equals(otherObj.innerSet) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/* 108 */     return this.innerSet != null ? this.innerSet.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 117 */     return "ConsistencyGroupReportSet [innerSet=" + this.innerSet + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ConsistencyGroupReportSet.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "consistencyGroupReportSet", propOrder = {"innerSet"})
+public class ConsistencyGroupReportSet {
+    @XmlElement(nillable = true)
+    protected List<ConsistencyGroupReport> innerSet;
+
+    public ConsistencyGroupReportSet() {
+    }
+
+    public ConsistencyGroupReportSet(List<ConsistencyGroupReport> innerSet) {
+        this.innerSet = innerSet;
+    }
+
+
+    public List<ConsistencyGroupReport> getInnerSet() {
+        if (this.innerSet == null) {
+            this.innerSet = new ArrayList();
+        }
+        return this.innerSet;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ConsistencyGroupReportSet)) {
+            return false;
+        }
+        ConsistencyGroupReportSet otherObj = (ConsistencyGroupReportSet) obj;
+
+        return this.innerSet == otherObj.innerSet ? true : this.innerSet != null ? this.innerSet.equals(otherObj.innerSet) : false;
+    }
+
+
+    public int hashCode() {
+        return this.innerSet != null ? this.innerSet.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "ConsistencyGroupReportSet [innerSet=" + this.innerSet + "]";
+    }
+}
+
+

@@ -1,139 +1,63 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="validateAttachVolumeToSplitter", propOrder={"splitter", "volumeParam"})
-/*     */ public class ValidateAttachVolumeToSplitter
-/*     */ {
-/*     */   protected SplitterUID splitter;
-/*     */   protected SetVolumeParam volumeParam;
-/*     */   
-/*     */   public ValidateAttachVolumeToSplitter() {}
-/*     */   
-/*     */   public ValidateAttachVolumeToSplitter(SplitterUID splitter, SetVolumeParam volumeParam)
-/*     */   {
-/*  47 */     this.splitter = splitter;
-/*  48 */     this.volumeParam = volumeParam;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public SplitterUID getSplitter()
-/*     */   {
-/*  60 */     return this.splitter;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setSplitter(SplitterUID value)
-/*     */   {
-/*  72 */     this.splitter = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public SetVolumeParam getVolumeParam()
-/*     */   {
-/*  84 */     return this.volumeParam;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setVolumeParam(SetVolumeParam value)
-/*     */   {
-/*  96 */     this.volumeParam = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/* 106 */     if (!(obj instanceof ValidateAttachVolumeToSplitter)) {
-/* 107 */       return false;
-/*     */     }
-/* 109 */     ValidateAttachVolumeToSplitter otherObj = (ValidateAttachVolumeToSplitter)obj;
-/*     */     
-/* 111 */     return (this.splitter != null ? this.splitter.equals(otherObj.splitter) : this.splitter == otherObj.splitter) && (this.volumeParam != null ? this.volumeParam.equals(otherObj.volumeParam) : this.volumeParam == otherObj.volumeParam);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/* 121 */     return (this.splitter != null ? this.splitter.hashCode() : 0) ^ (this.volumeParam != null ? this.volumeParam.hashCode() : 0);
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 131 */     return "ValidateAttachVolumeToSplitter [splitter=" + this.splitter + ", " + "volumeParam=" + this.volumeParam + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ValidateAttachVolumeToSplitter.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "validateAttachVolumeToSplitter", propOrder = {"splitter", "volumeParam"})
+public class ValidateAttachVolumeToSplitter {
+    protected SplitterUID splitter;
+    protected SetVolumeParam volumeParam;
+
+    public ValidateAttachVolumeToSplitter() {
+    }
+
+    public ValidateAttachVolumeToSplitter(SplitterUID splitter, SetVolumeParam volumeParam) {
+        this.splitter = splitter;
+        this.volumeParam = volumeParam;
+    }
+
+
+    public SplitterUID getSplitter() {
+        return this.splitter;
+    }
+
+
+    public void setSplitter(SplitterUID value) {
+        this.splitter = value;
+    }
+
+
+    public SetVolumeParam getVolumeParam() {
+        return this.volumeParam;
+    }
+
+
+    public void setVolumeParam(SetVolumeParam value) {
+        this.volumeParam = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ValidateAttachVolumeToSplitter)) {
+            return false;
+        }
+        ValidateAttachVolumeToSplitter otherObj = (ValidateAttachVolumeToSplitter) obj;
+
+        return (this.splitter != null ? this.splitter.equals(otherObj.splitter) : this.splitter == otherObj.splitter) && (this.volumeParam != null ? this.volumeParam.equals(otherObj.volumeParam) : this.volumeParam == otherObj.volumeParam);
+    }
+
+
+    public int hashCode() {
+        return (this.splitter != null ? this.splitter.hashCode() : 0) ^ (this.volumeParam != null ? this.volumeParam.hashCode() : 0);
+    }
+
+
+    public String toString() {
+        return "ValidateAttachVolumeToSplitter [splitter=" + this.splitter + ", " + "volumeParam=" + this.volumeParam + "]";
+    }
+}
+
+

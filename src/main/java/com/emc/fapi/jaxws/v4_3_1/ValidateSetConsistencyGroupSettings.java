@@ -1,109 +1,51 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="validateSetConsistencyGroupSettings", propOrder={"settingsParam"})
-/*     */ public class ValidateSetConsistencyGroupSettings
-/*     */ {
-/*     */   protected ConsistencyGroupSettingsChangesParam settingsParam;
-/*     */   
-/*     */   public ValidateSetConsistencyGroupSettings() {}
-/*     */   
-/*     */   public ValidateSetConsistencyGroupSettings(ConsistencyGroupSettingsChangesParam settingsParam)
-/*     */   {
-/*  44 */     this.settingsParam = settingsParam;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ConsistencyGroupSettingsChangesParam getSettingsParam()
-/*     */   {
-/*  56 */     return this.settingsParam;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setSettingsParam(ConsistencyGroupSettingsChangesParam value)
-/*     */   {
-/*  68 */     this.settingsParam = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  78 */     if (!(obj instanceof ValidateSetConsistencyGroupSettings)) {
-/*  79 */       return false;
-/*     */     }
-/*  81 */     ValidateSetConsistencyGroupSettings otherObj = (ValidateSetConsistencyGroupSettings)obj;
-/*     */     
-/*  83 */     return this.settingsParam == otherObj.settingsParam ? true : this.settingsParam != null ? this.settingsParam.equals(otherObj.settingsParam) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  92 */     return this.settingsParam != null ? this.settingsParam.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 101 */     return "ValidateSetConsistencyGroupSettings [settingsParam=" + this.settingsParam + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ValidateSetConsistencyGroupSettings.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "validateSetConsistencyGroupSettings", propOrder = {"settingsParam"})
+public class ValidateSetConsistencyGroupSettings {
+    protected ConsistencyGroupSettingsChangesParam settingsParam;
+
+    public ValidateSetConsistencyGroupSettings() {
+    }
+
+    public ValidateSetConsistencyGroupSettings(ConsistencyGroupSettingsChangesParam settingsParam) {
+        this.settingsParam = settingsParam;
+    }
+
+
+    public ConsistencyGroupSettingsChangesParam getSettingsParam() {
+        return this.settingsParam;
+    }
+
+
+    public void setSettingsParam(ConsistencyGroupSettingsChangesParam value) {
+        this.settingsParam = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ValidateSetConsistencyGroupSettings)) {
+            return false;
+        }
+        ValidateSetConsistencyGroupSettings otherObj = (ValidateSetConsistencyGroupSettings) obj;
+
+        return this.settingsParam == otherObj.settingsParam ? true : this.settingsParam != null ? this.settingsParam.equals(otherObj.settingsParam) : false;
+    }
+
+
+    public int hashCode() {
+        return this.settingsParam != null ? this.settingsParam.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "ValidateSetConsistencyGroupSettings [settingsParam=" + this.settingsParam + "]";
+    }
+}
+
+

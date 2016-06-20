@@ -1,111 +1,53 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlElement;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="verifyRPAStateWithDefaultTimeoutResponse", propOrder={"_return"})
-/*     */ public class VerifyRPAStateWithDefaultTimeoutResponse
-/*     */ {
-/*     */   @XmlElement(name="return")
-/*     */   protected TransactionID _return;
-/*     */   
-/*     */   public VerifyRPAStateWithDefaultTimeoutResponse() {}
-/*     */   
-/*     */   public VerifyRPAStateWithDefaultTimeoutResponse(TransactionID _return)
-/*     */   {
-/*  46 */     this._return = _return;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public TransactionID getReturn()
-/*     */   {
-/*  58 */     return this._return;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setReturn(TransactionID value)
-/*     */   {
-/*  70 */     this._return = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  80 */     if (!(obj instanceof VerifyRPAStateWithDefaultTimeoutResponse)) {
-/*  81 */       return false;
-/*     */     }
-/*  83 */     VerifyRPAStateWithDefaultTimeoutResponse otherObj = (VerifyRPAStateWithDefaultTimeoutResponse)obj;
-/*     */     
-/*  85 */     return this._return == otherObj._return ? true : this._return != null ? this._return.equals(otherObj._return) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  94 */     return this._return != null ? this._return.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 103 */     return "VerifyRPAStateWithDefaultTimeoutResponse [_return=" + this._return + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\VerifyRPAStateWithDefaultTimeoutResponse.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "verifyRPAStateWithDefaultTimeoutResponse", propOrder = {"_return"})
+public class VerifyRPAStateWithDefaultTimeoutResponse {
+    @XmlElement(name = "return")
+    protected TransactionID _return;
+
+    public VerifyRPAStateWithDefaultTimeoutResponse() {
+    }
+
+    public VerifyRPAStateWithDefaultTimeoutResponse(TransactionID _return) {
+        this._return = _return;
+    }
+
+
+    public TransactionID getReturn() {
+        return this._return;
+    }
+
+
+    public void setReturn(TransactionID value) {
+        this._return = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof VerifyRPAStateWithDefaultTimeoutResponse)) {
+            return false;
+        }
+        VerifyRPAStateWithDefaultTimeoutResponse otherObj = (VerifyRPAStateWithDefaultTimeoutResponse) obj;
+
+        return this._return == otherObj._return ? true : this._return != null ? this._return.equals(otherObj._return) : false;
+    }
+
+
+    public int hashCode() {
+        return this._return != null ? this._return.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "VerifyRPAStateWithDefaultTimeoutResponse [_return=" + this._return + "]";
+    }
+}
+
+

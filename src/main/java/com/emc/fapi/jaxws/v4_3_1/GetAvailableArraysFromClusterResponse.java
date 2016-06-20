@@ -1,111 +1,53 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlElement;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="getAvailableArraysFromClusterResponse", propOrder={"_return"})
-/*     */ public class GetAvailableArraysFromClusterResponse
-/*     */ {
-/*     */   @XmlElement(name="return")
-/*     */   protected ClusterAvailableArrays _return;
-/*     */   
-/*     */   public GetAvailableArraysFromClusterResponse() {}
-/*     */   
-/*     */   public GetAvailableArraysFromClusterResponse(ClusterAvailableArrays _return)
-/*     */   {
-/*  46 */     this._return = _return;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ClusterAvailableArrays getReturn()
-/*     */   {
-/*  58 */     return this._return;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setReturn(ClusterAvailableArrays value)
-/*     */   {
-/*  70 */     this._return = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  80 */     if (!(obj instanceof GetAvailableArraysFromClusterResponse)) {
-/*  81 */       return false;
-/*     */     }
-/*  83 */     GetAvailableArraysFromClusterResponse otherObj = (GetAvailableArraysFromClusterResponse)obj;
-/*     */     
-/*  85 */     return this._return == otherObj._return ? true : this._return != null ? this._return.equals(otherObj._return) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  94 */     return this._return != null ? this._return.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 103 */     return "GetAvailableArraysFromClusterResponse [_return=" + this._return + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\GetAvailableArraysFromClusterResponse.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "getAvailableArraysFromClusterResponse", propOrder = {"_return"})
+public class GetAvailableArraysFromClusterResponse {
+    @XmlElement(name = "return")
+    protected ClusterAvailableArrays _return;
+
+    public GetAvailableArraysFromClusterResponse() {
+    }
+
+    public GetAvailableArraysFromClusterResponse(ClusterAvailableArrays _return) {
+        this._return = _return;
+    }
+
+
+    public ClusterAvailableArrays getReturn() {
+        return this._return;
+    }
+
+
+    public void setReturn(ClusterAvailableArrays value) {
+        this._return = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof GetAvailableArraysFromClusterResponse)) {
+            return false;
+        }
+        GetAvailableArraysFromClusterResponse otherObj = (GetAvailableArraysFromClusterResponse) obj;
+
+        return this._return == otherObj._return ? true : this._return != null ? this._return.equals(otherObj._return) : false;
+    }
+
+
+    public int hashCode() {
+        return this._return != null ? this._return.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "GetAvailableArraysFromClusterResponse [_return=" + this._return + "]";
+    }
+}
+
+

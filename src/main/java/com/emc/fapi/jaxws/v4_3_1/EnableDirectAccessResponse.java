@@ -5,11 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name="enableDirectAccessResponse")
-public class EnableDirectAccessResponse {}
+@XmlType(name = "enableDirectAccessResponse")
+public class EnableDirectAccessResponse {
+}
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\EnableDirectAccessResponse.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */

@@ -1,109 +1,51 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="getIllegalPauseTransferForGroupSetProblems", propOrder={"groupSetSubset"})
-/*     */ public class GetIllegalPauseTransferForGroupSetProblems
-/*     */ {
-/*     */   protected ConsistencyGroupSetSubset groupSetSubset;
-/*     */   
-/*     */   public GetIllegalPauseTransferForGroupSetProblems() {}
-/*     */   
-/*     */   public GetIllegalPauseTransferForGroupSetProblems(ConsistencyGroupSetSubset groupSetSubset)
-/*     */   {
-/*  44 */     this.groupSetSubset = groupSetSubset;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ConsistencyGroupSetSubset getGroupSetSubset()
-/*     */   {
-/*  56 */     return this.groupSetSubset;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setGroupSetSubset(ConsistencyGroupSetSubset value)
-/*     */   {
-/*  68 */     this.groupSetSubset = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  78 */     if (!(obj instanceof GetIllegalPauseTransferForGroupSetProblems)) {
-/*  79 */       return false;
-/*     */     }
-/*  81 */     GetIllegalPauseTransferForGroupSetProblems otherObj = (GetIllegalPauseTransferForGroupSetProblems)obj;
-/*     */     
-/*  83 */     return this.groupSetSubset == otherObj.groupSetSubset ? true : this.groupSetSubset != null ? this.groupSetSubset.equals(otherObj.groupSetSubset) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  92 */     return this.groupSetSubset != null ? this.groupSetSubset.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 101 */     return "GetIllegalPauseTransferForGroupSetProblems [groupSetSubset=" + this.groupSetSubset + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\GetIllegalPauseTransferForGroupSetProblems.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "getIllegalPauseTransferForGroupSetProblems", propOrder = {"groupSetSubset"})
+public class GetIllegalPauseTransferForGroupSetProblems {
+    protected ConsistencyGroupSetSubset groupSetSubset;
+
+    public GetIllegalPauseTransferForGroupSetProblems() {
+    }
+
+    public GetIllegalPauseTransferForGroupSetProblems(ConsistencyGroupSetSubset groupSetSubset) {
+        this.groupSetSubset = groupSetSubset;
+    }
+
+
+    public ConsistencyGroupSetSubset getGroupSetSubset() {
+        return this.groupSetSubset;
+    }
+
+
+    public void setGroupSetSubset(ConsistencyGroupSetSubset value) {
+        this.groupSetSubset = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof GetIllegalPauseTransferForGroupSetProblems)) {
+            return false;
+        }
+        GetIllegalPauseTransferForGroupSetProblems otherObj = (GetIllegalPauseTransferForGroupSetProblems) obj;
+
+        return this.groupSetSubset == otherObj.groupSetSubset ? true : this.groupSetSubset != null ? this.groupSetSubset.equals(otherObj.groupSetSubset) : false;
+    }
+
+
+    public int hashCode() {
+        return this.groupSetSubset != null ? this.groupSetSubset.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "GetIllegalPauseTransferForGroupSetProblems [groupSetSubset=" + this.groupSetSubset + "]";
+    }
+}
+
+

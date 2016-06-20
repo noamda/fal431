@@ -1,47 +1,27 @@
-/*    */ package com.emc.fapi.jaxws.v4_3_1;
-/*    */ 
-/*    */ import javax.xml.bind.annotation.XmlEnum;
-/*    */ import javax.xml.bind.annotation.XmlType;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ @XmlType(name="replicationSetType")
-/*    */ @XmlEnum
-/*    */ public enum ReplicationSetType
-/*    */ {
-/* 29 */   BLOCK, 
-/* 30 */   FILE_SYSTEM, 
-/* 31 */   VDM, 
-/* 32 */   UNKNOWN;
-/*    */   
-/*    */   private ReplicationSetType() {}
-/* 35 */   public String value() { return name(); }
-/*    */   
-/*    */   public static ReplicationSetType fromValue(String v)
-/*    */   {
-/* 39 */     return valueOf(v);
-/*    */   }
-/*    */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ReplicationSetType.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlType(name = "replicationSetType")
+@XmlEnum
+public enum ReplicationSetType {
+    BLOCK,
+    FILE_SYSTEM,
+    VDM,
+    UNKNOWN;
+
+    private ReplicationSetType() {
+    }
+
+    public static ReplicationSetType fromValue(String v) {
+        return valueOf(v);
+    }
+
+    public String value() {
+        return name();
+    }
+}
+
+

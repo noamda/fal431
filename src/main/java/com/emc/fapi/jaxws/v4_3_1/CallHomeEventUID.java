@@ -1,101 +1,51 @@
-/*    */ package com.emc.fapi.jaxws.v4_3_1;
-/*    */ 
-/*    */ import javax.xml.bind.annotation.XmlAccessType;
-/*    */ import javax.xml.bind.annotation.XmlAccessorType;
-/*    */ import javax.xml.bind.annotation.XmlType;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ @XmlAccessorType(XmlAccessType.FIELD)
-/*    */ @XmlType(name="CallHomeEventUID", propOrder={"id"})
-/*    */ public class CallHomeEventUID
-/*    */ {
-/*    */   protected long id;
-/*    */   
-/*    */   public CallHomeEventUID() {}
-/*    */   
-/*    */   public CallHomeEventUID(long id)
-/*    */   {
-/* 44 */     this.id = id;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public long getId()
-/*    */   {
-/* 52 */     return this.id;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public void setId(long value)
-/*    */   {
-/* 60 */     this.id = value;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public boolean equals(Object obj)
-/*    */   {
-/* 70 */     if (!(obj instanceof CallHomeEventUID)) {
-/* 71 */       return false;
-/*    */     }
-/* 73 */     CallHomeEventUID otherObj = (CallHomeEventUID)obj;
-/*    */     
-/* 75 */     return this.id == otherObj.id;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public int hashCode()
-/*    */   {
-/* 84 */     return (int)this.id;
-/*    */   }
-/*    */   
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */   public String toString()
-/*    */   {
-/* 93 */     return "CallHomeEventUID [id=" + this.id + "]";
-/*    */   }
-/*    */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\CallHomeEventUID.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CallHomeEventUID", propOrder = {"id"})
+public class CallHomeEventUID {
+    protected long id;
+
+    public CallHomeEventUID() {
+    }
+
+    public CallHomeEventUID(long id) {
+        this.id = id;
+    }
+
+
+    public long getId() {
+        return this.id;
+    }
+
+
+    public void setId(long value) {
+        this.id = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CallHomeEventUID)) {
+            return false;
+        }
+        CallHomeEventUID otherObj = (CallHomeEventUID) obj;
+
+        return this.id == otherObj.id;
+    }
+
+
+    public int hashCode() {
+        return (int) this.id;
+    }
+
+
+    public String toString() {
+        return "CallHomeEventUID [id=" + this.id + "]";
+    }
+}
+
+

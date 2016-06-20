@@ -1,45 +1,26 @@
-/*    */ package com.emc.fapi.jaxws.v4_3_1;
-/*    */ 
-/*    */ import javax.xml.bind.annotation.XmlEnum;
-/*    */ import javax.xml.bind.annotation.XmlType;
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ 
-/*    */ @XmlType(name="interfaceType")
-/*    */ @XmlEnum
-/*    */ public enum InterfaceType
-/*    */ {
-/* 28 */   WAN, 
-/* 29 */   LAN, 
-/* 30 */   UNKNOWN;
-/*    */   
-/*    */   private InterfaceType() {}
-/* 33 */   public String value() { return name(); }
-/*    */   
-/*    */   public static InterfaceType fromValue(String v)
-/*    */   {
-/* 37 */     return valueOf(v);
-/*    */   }
-/*    */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\InterfaceType.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlType(name = "interfaceType")
+@XmlEnum
+public enum InterfaceType {
+    WAN,
+    LAN,
+    UNKNOWN;
+
+    private InterfaceType() {
+    }
+
+    public static InterfaceType fromValue(String v) {
+        return valueOf(v);
+    }
+
+    public String value() {
+        return name();
+    }
+}
+
+

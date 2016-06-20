@@ -1,111 +1,53 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlElement;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="applyBalanceLoadRecommendation", propOrder={"recommendation"})
-/*     */ public class ApplyBalanceLoadRecommendation
-/*     */ {
-/*     */   @XmlElement(nillable=true)
-/*     */   protected BalanceLoadRecommendation recommendation;
-/*     */   
-/*     */   public ApplyBalanceLoadRecommendation() {}
-/*     */   
-/*     */   public ApplyBalanceLoadRecommendation(BalanceLoadRecommendation recommendation)
-/*     */   {
-/*  46 */     this.recommendation = recommendation;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public BalanceLoadRecommendation getRecommendation()
-/*     */   {
-/*  58 */     return this.recommendation;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setRecommendation(BalanceLoadRecommendation value)
-/*     */   {
-/*  70 */     this.recommendation = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  80 */     if (!(obj instanceof ApplyBalanceLoadRecommendation)) {
-/*  81 */       return false;
-/*     */     }
-/*  83 */     ApplyBalanceLoadRecommendation otherObj = (ApplyBalanceLoadRecommendation)obj;
-/*     */     
-/*  85 */     return this.recommendation == otherObj.recommendation ? true : this.recommendation != null ? this.recommendation.equals(otherObj.recommendation) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  94 */     return this.recommendation != null ? this.recommendation.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 103 */     return "ApplyBalanceLoadRecommendation [recommendation=" + this.recommendation + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ApplyBalanceLoadRecommendation.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "applyBalanceLoadRecommendation", propOrder = {"recommendation"})
+public class ApplyBalanceLoadRecommendation {
+    @XmlElement(nillable = true)
+    protected BalanceLoadRecommendation recommendation;
+
+    public ApplyBalanceLoadRecommendation() {
+    }
+
+    public ApplyBalanceLoadRecommendation(BalanceLoadRecommendation recommendation) {
+        this.recommendation = recommendation;
+    }
+
+
+    public BalanceLoadRecommendation getRecommendation() {
+        return this.recommendation;
+    }
+
+
+    public void setRecommendation(BalanceLoadRecommendation value) {
+        this.recommendation = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ApplyBalanceLoadRecommendation)) {
+            return false;
+        }
+        ApplyBalanceLoadRecommendation otherObj = (ApplyBalanceLoadRecommendation) obj;
+
+        return this.recommendation == otherObj.recommendation ? true : this.recommendation != null ? this.recommendation.equals(otherObj.recommendation) : false;
+    }
+
+
+    public int hashCode() {
+        return this.recommendation != null ? this.recommendation.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "ApplyBalanceLoadRecommendation [recommendation=" + this.recommendation + "]";
+    }
+}
+
+

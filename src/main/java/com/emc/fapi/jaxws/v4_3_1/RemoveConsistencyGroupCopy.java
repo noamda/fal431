@@ -1,109 +1,51 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="removeConsistencyGroupCopy", propOrder={"groupCopy"})
-/*     */ public class RemoveConsistencyGroupCopy
-/*     */ {
-/*     */   protected ConsistencyGroupCopyUID groupCopy;
-/*     */   
-/*     */   public RemoveConsistencyGroupCopy() {}
-/*     */   
-/*     */   public RemoveConsistencyGroupCopy(ConsistencyGroupCopyUID groupCopy)
-/*     */   {
-/*  44 */     this.groupCopy = groupCopy;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public ConsistencyGroupCopyUID getGroupCopy()
-/*     */   {
-/*  56 */     return this.groupCopy;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public void setGroupCopy(ConsistencyGroupCopyUID value)
-/*     */   {
-/*  68 */     this.groupCopy = value;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  78 */     if (!(obj instanceof RemoveConsistencyGroupCopy)) {
-/*  79 */       return false;
-/*     */     }
-/*  81 */     RemoveConsistencyGroupCopy otherObj = (RemoveConsistencyGroupCopy)obj;
-/*     */     
-/*  83 */     return this.groupCopy == otherObj.groupCopy ? true : this.groupCopy != null ? this.groupCopy.equals(otherObj.groupCopy) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  92 */     return this.groupCopy != null ? this.groupCopy.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 101 */     return "RemoveConsistencyGroupCopy [groupCopy=" + this.groupCopy + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\RemoveConsistencyGroupCopy.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "removeConsistencyGroupCopy", propOrder = {"groupCopy"})
+public class RemoveConsistencyGroupCopy {
+    protected ConsistencyGroupCopyUID groupCopy;
+
+    public RemoveConsistencyGroupCopy() {
+    }
+
+    public RemoveConsistencyGroupCopy(ConsistencyGroupCopyUID groupCopy) {
+        this.groupCopy = groupCopy;
+    }
+
+
+    public ConsistencyGroupCopyUID getGroupCopy() {
+        return this.groupCopy;
+    }
+
+
+    public void setGroupCopy(ConsistencyGroupCopyUID value) {
+        this.groupCopy = value;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof RemoveConsistencyGroupCopy)) {
+            return false;
+        }
+        RemoveConsistencyGroupCopy otherObj = (RemoveConsistencyGroupCopy) obj;
+
+        return this.groupCopy == otherObj.groupCopy ? true : this.groupCopy != null ? this.groupCopy.equals(otherObj.groupCopy) : false;
+    }
+
+
+    public int hashCode() {
+        return this.groupCopy != null ? this.groupCopy.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "RemoveConsistencyGroupCopy [groupCopy=" + this.groupCopy + "]";
+    }
+}
+
+

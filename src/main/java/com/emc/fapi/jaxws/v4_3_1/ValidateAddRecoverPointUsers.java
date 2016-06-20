@@ -1,116 +1,51 @@
-/*     */ package com.emc.fapi.jaxws.v4_3_1;
-/*     */ 
-/*     */ import java.util.ArrayList;
-/*     */ import java.util.List;
-/*     */ import javax.xml.bind.annotation.XmlAccessType;
-/*     */ import javax.xml.bind.annotation.XmlAccessorType;
-/*     */ import javax.xml.bind.annotation.XmlType;
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ @XmlAccessorType(XmlAccessType.FIELD)
-/*     */ @XmlType(name="validateAddRecoverPointUsers", propOrder={"users"})
-/*     */ public class ValidateAddRecoverPointUsers
-/*     */ {
-/*     */   protected List<RecoverPointUser> users;
-/*     */   
-/*     */   public ValidateAddRecoverPointUsers() {}
-/*     */   
-/*     */   public ValidateAddRecoverPointUsers(List<RecoverPointUser> users)
-/*     */   {
-/*  46 */     this.users = users;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public List<RecoverPointUser> getUsers()
-/*     */   {
-/*  72 */     if (this.users == null) {
-/*  73 */       this.users = new ArrayList();
-/*     */     }
-/*  75 */     return this.users;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public boolean equals(Object obj)
-/*     */   {
-/*  85 */     if (!(obj instanceof ValidateAddRecoverPointUsers)) {
-/*  86 */       return false;
-/*     */     }
-/*  88 */     ValidateAddRecoverPointUsers otherObj = (ValidateAddRecoverPointUsers)obj;
-/*     */     
-/*  90 */     return this.users == otherObj.users ? true : this.users != null ? this.users.equals(otherObj.users) : false;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public int hashCode()
-/*     */   {
-/*  99 */     return this.users != null ? this.users.hashCode() : 0;
-/*     */   }
-/*     */   
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */ 
-/*     */   public String toString()
-/*     */   {
-/* 108 */     return "ValidateAddRecoverPointUsers [users=" + this.users + "]";
-/*     */   }
-/*     */ }
+package com.emc.fapi.jaxws.v4_3_1;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
+import java.util.List;
 
 
-/* Location:              C:\Users\davidn1\Downloads\RecoverPoint_SDK\src\main\resources\fapi_client_4_3_1.jar!\com\emc\fapi\jaxws\v4_3_1\ValidateAddRecoverPointUsers.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       0.7.1
- */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "validateAddRecoverPointUsers", propOrder = {"users"})
+public class ValidateAddRecoverPointUsers {
+    protected List<RecoverPointUser> users;
+
+    public ValidateAddRecoverPointUsers() {
+    }
+
+    public ValidateAddRecoverPointUsers(List<RecoverPointUser> users) {
+        this.users = users;
+    }
+
+
+    public List<RecoverPointUser> getUsers() {
+        if (this.users == null) {
+            this.users = new ArrayList();
+        }
+        return this.users;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ValidateAddRecoverPointUsers)) {
+            return false;
+        }
+        ValidateAddRecoverPointUsers otherObj = (ValidateAddRecoverPointUsers) obj;
+
+        return this.users == otherObj.users ? true : this.users != null ? this.users.equals(otherObj.users) : false;
+    }
+
+
+    public int hashCode() {
+        return this.users != null ? this.users.hashCode() : 0;
+    }
+
+
+    public String toString() {
+        return "ValidateAddRecoverPointUsers [users=" + this.users + "]";
+    }
+}
+
+
